@@ -24,7 +24,7 @@ class ProductController extends Controller
     {
         try {
             $products = $this->productService->getAllProducts();
-            return Response::sendResponse($products, 'Registros obtenidos con exito.');
+            return Response::sendResponse($products, 'Registros obtenidos con éxito.');
         } catch (\Exception $ex) {
             Log::error($ex->getMessage());
             return Response::sendError('Ocurrio un error inesperado al intentar procesar la solicitud', 500);
@@ -38,7 +38,7 @@ class ProductController extends Controller
     {
         try {
             $product = $this->productService->createProduct($request->all());
-            return Response::sendResponse($product, 'Registro creado con exito.');
+            return Response::sendResponse($product, 'Registro creado con éxito.');
         } catch (\Exception $ex) {
             Log::error($ex->getMessage());
             return Response::sendError('Ocurrio un error inesperado al intentar procesar la solicitud', 500);
@@ -56,7 +56,7 @@ class ProductController extends Controller
                 return Response::sendError('El registro no existe.', 404);
             }
             $product = $this->productService->updateProduct($id, $request->all());
-            return Response::sendResponse($product, 'Registro actualizado con exito.');
+            return Response::sendResponse($product, 'Registro actualizado con éxito.');
         } catch (\Exception $ex) {
             Log::error($ex->getMessage());
             return Response::sendError('Ocurrio un error inesperado al intentar procesar la solicitud', 500);
@@ -74,7 +74,7 @@ class ProductController extends Controller
                 return Response::sendError('El registro no existe.', 404);
             }
             $this->productService->deleteProduct($id);
-            return Response::sendResponse([], 'Registro eliminado con exito.');
+            return Response::sendResponse([], 'Registro eliminado con éxito.');
         } catch (\Exception $ex) {
             Log::error($ex->getMessage());
             return Response::sendError('Ocurrio un error inesperado al intentar procesar la solicitud', 500);

@@ -4,64 +4,56 @@ namespace App\Http\Controllers\User;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Services\User\UserService;
+use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\User\LoginUserRequest;
+use App\Http\Requests\User\RegisterUserRequest;
 use App\Http\Controllers\ResponseController as Response;
 
 class UserController extends Controller
 {
-    public function register(Request $request)
+    private $userService;
+    public function __construct(UserService $userService)
     {
-        $data = $request->validate([
-            'name' => 'required|string',
-            'email' => 'required|string|email|unique:users,email',
-            'password' => 'required|min:8',
-        ]);
-        $user = User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password'])
-        ]);
-        $token = $user->createToken('web-app-token')->plainTextToken;
-        $response = [
-            'user' => $user,
-            'token' => $token
-        ];
-        return Response::sendResponse($response, 'Usuario registrado con exito.');
+        $this->userService = $userService;
     }
 
-    public function login(Request $request)
+    public function register(RegisterUserRequest $request)
     {
-        $request->validate([
-            'email' => 'required|string|email',
-            'password' => 'required|min:8'
-        ]);
-
-        $user = User::where('email', $request->email)->first();
-
-        if (!$user || !Hash::check($request->password, $user->password)) {
-            return response([
-                'message' => ['These credentials do not match our records.']
-            ], 404);
+        try {
+            $user = $this->userService->createUser($request->all());
+            return Response::sendResponse($user, 'Registro creado con éxito.');
+        } catch (\Exception $ex) {
+            Log::error($ex->getMessage());
+            return Response::sendError('Ocurrio un error inesperado al intentar procesar la solicitud', 500);
         }
+    }
 
-        $token = $user->createToken('web-app-token')->plainTextToken;
-
-        $response = [
-            'user' => $user,
-            'token' => $token
-        ];
-
-        return response()->json($response, 201);
+    public function login(LoginUserRequest $request)
+    {
+        try {
+            $response = $this->userService->login($request->all());
+            if(isset($response['success']) && !$response['success']){
+                return Response::sendError($response['message'], 400);
+            }
+            return Response::sendResponse($response, 'Logeado con éxito.');
+        } catch (\Exception $ex) {
+            Log::error($ex->getMessage());
+            return Response::sendError('Ocurrio un error inesperado al intentar procesar la solicitud', 500);
+        }
     }
 
     public function logout()
     {
-        auth()->user()->tokens()->delete();
+        try {
+            $this->userService->logout();
+            return Response::sendResponse([], 'Sesión cerrada con éxito.');
+        } catch (\Exception $ex) {
+            Log::error($ex->getMessage());
+            return Response::sendError('Ocurrio un error inesperado al intentar procesar la solicitud', 500);
+        }
 
-        $response = [
-            'message' => 'logged out',
-        ];
-        return response($response);
     }
 }
