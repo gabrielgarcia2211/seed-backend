@@ -17,4 +17,24 @@ class ProductService
     {
         return $this->productRepository->all();
     }
+
+    public function createProduct($data)
+    {
+        return $this->productRepository->create($data);
+    }
+
+    public function updateProduct($id, $data)
+    {
+        return $this->productRepository->update($id, $data);
+    }
+
+    public function deleteProduct($id)
+    {
+        return $this->productRepository->delete($id);
+    }
+
+    public function getProductById($id)
+    {
+        return $this->productRepository->find($id);
+    }
 }

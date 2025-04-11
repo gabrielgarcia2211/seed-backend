@@ -35,7 +35,7 @@ class ProductRepository implements ProductRepositoryInterface
 
     public function find($id)
     {
-        return $this->model->findOrFail($id);
+        return $this->model->find($id);
     }
 
     public function all()

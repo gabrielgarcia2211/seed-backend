@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use App\Services\Product\ProductService;
+use App\Http\Requests\Product\StoreProductRequest;
+use App\Http\Requests\Product\UpdateProductRequest;
 use App\Http\Controllers\ResponseController as Response;
 
 class ProductController extends Controller
@@ -31,43 +33,35 @@ class ProductController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreProductRequest $request)
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
+        try {
+            $product = $this->productService->createProduct($request->all());
+            return Response::sendResponse($product, 'Registro creado con exito.');
+        } catch (\Exception $ex) {
+            Log::error($ex->getMessage());
+            return Response::sendError('Ocurrio un error inesperado al intentar procesar la solicitud', 500);
+        }
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateProductRequest $request, string $id)
     {
-        //
+        try {
+            $product = $this->productService->getProductById($id);;
+            if (!$product) {
+                return Response::sendError('El registro no existe.', 404);
+            }
+            $product = $this->productService->updateProduct($id, $request->all());
+            return Response::sendResponse($product, 'Registro actualizado con exito.');
+        } catch (\Exception $ex) {
+            Log::error($ex->getMessage());
+            return Response::sendError('Ocurrio un error inesperado al intentar procesar la solicitud', 500);
+        }
     }
 
     /**
@@ -75,6 +69,16 @@ class ProductController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        try {
+            $product = $this->productService->getProductById($id);;
+            if (!$product) {
+                return Response::sendError('El registro no existe.', 404);
+            }
+            $this->productService->deleteProduct($id);
+            return Response::sendResponse([], 'Registro eliminado con exito.');
+        } catch (\Exception $ex) {
+            Log::error($ex->getMessage());
+            return Response::sendError('Ocurrio un error inesperado al intentar procesar la solicitud', 500);
+        }
     }
 }
