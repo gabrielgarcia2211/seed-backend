@@ -65,7 +65,20 @@ php artisan migrate --seed
 ---
 
 
-### 🖥 6. Levantar el servidor de desarrollo
+### ⚙️️ 6. Ejecutar visualizacion de imagenes
+
+```bash
+php artisan storage:link
+```
+
+Se realizo una integracion y control de archivos (iamgenes) local, si desea una integracion **GCP**, te puedes guiar por acá
+
+👉 [Guia de Instalación](./docs/integracion/integracion_gcp_laravel.md) 
+
+---
+
+
+### 🖥 7. Levantar el servidor de desarrollo
 
 ```bash
 php artisan serve
@@ -75,7 +88,7 @@ Visita: [http://127.0.0.1:8000](http://127.0.0.1:8000)
 
 ---
 
-### 📮 7. Probar autenticación y CRUD
+### 📮 8. Probar autenticación y CRUD
 
 Usa herramientas como Postman o Insomnia para interactuar con la API.
 
@@ -93,7 +106,7 @@ Accept application/json
 
 ---
 
-### 🧪 8. Pruebas unitarias
+### 🧪 9. Pruebas unitarias
 
 #### Creación y listado de products:
 
