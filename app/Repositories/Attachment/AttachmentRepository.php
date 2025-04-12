@@ -26,10 +26,25 @@ class AttachmentRepository implements AttachmentRepositoryInterface
         return $attachment;
     }
 
-    public function delete($id)
+    public function updateByAttachebleId($id, array $attributes)
     {
-        $attachment = $this->model->findOrFail($id);
+        $attachment = $this->model->where('attachable_id', $id);
+        $attachment->update($attributes);
+        return $attachment;
+    }
+
+    public function deleteByAttachebleId($id)
+    {
+        $attachment = $this->model->where('attachable_id', $id);
         $attachment->delete();
         return $attachment;
+    }
+
+    public function findByAttachebleId($id, $class)
+    {
+        return  $this->model->where([
+            'attachable_id' => $id,
+            'attachable_type' => $class,
+        ])->first();
     }
 }

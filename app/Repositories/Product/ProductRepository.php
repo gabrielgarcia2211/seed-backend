@@ -40,6 +40,8 @@ class ProductRepository implements ProductRepositoryInterface
 
     public function all()
     {
-        return $this->model->all();
+        return $this->model->leftJoin('attachments', 'attachments.attachable_id', '=', 'products.id')
+            ->select('products.*', 'attachments.file_path')
+            ->get();
     }
 }

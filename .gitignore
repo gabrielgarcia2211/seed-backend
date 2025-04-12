@@ -3,6 +3,7 @@
 /public/build
 /public/hot
 /public/storage
+/public/gcs_sim
 /storage/*.key
 /storage/pail
 /vendor
