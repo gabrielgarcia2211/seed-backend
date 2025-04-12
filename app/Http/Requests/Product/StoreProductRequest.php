@@ -20,6 +20,7 @@ class StoreProductRequest extends FormRequest
             'precio' => 'required|numeric|min:0',
             'descripcion' => 'nullable|string|max:1000',
             'activo' => 'required|boolean',
+            'attachment' => 'nullable|file',
         ];
     }
 
@@ -34,8 +35,9 @@ class StoreProductRequest extends FormRequest
             'precio.min' => 'El precio no puede ser menor que 0.',
             'descripcion.string' => 'La descripción debe ser una cadena de texto.',
             'descripcion.max' => 'La descripción no puede tener más de 1000 caracteres.',
-            'activo.required' => 'El estado activo es obligatorio.',
-            'activo.boolean' => 'El estado activo debe ser verdadero o falso.',
+            'activo.required' => 'El estado es obligatorio.',
+            'activo.boolean' => 'El estado debe ser verdadero o falso.',
+            'attachment.file' => 'El archivo adjunto debe ser un archivo válido.',
         ];
     }
 
