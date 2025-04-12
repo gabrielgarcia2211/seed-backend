@@ -20,7 +20,7 @@ class StoreProductRequest extends FormRequest
             'precio' => 'required|numeric|min:0',
             'descripcion' => 'nullable|string|max:1000',
             'activo' => 'required|boolean',
-            'attachment' => 'nullable|file',
+            'attachment' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ];
     }
 
@@ -37,7 +37,9 @@ class StoreProductRequest extends FormRequest
             'descripcion.max' => 'La descripción no puede tener más de 1000 caracteres.',
             'activo.required' => 'El estado es obligatorio.',
             'activo.boolean' => 'El estado debe ser verdadero o falso.',
-            'attachment.file' => 'El archivo adjunto debe ser un archivo válido.',
+            'attachment.image' => 'El archivo adjunto debe ser una imagen.',
+            'attachment.mimes' => 'El archivo adjunto debe ser un archivo de tipo: jpeg, png, jpg, gif, svg.',
+            'attachment.max' => 'El archivo adjunto no puede superar los 2048 kilobytes.',
         ];
     }
 
