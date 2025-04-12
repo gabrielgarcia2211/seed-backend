@@ -132,5 +132,3 @@ Con la cuenta en GCP:
 ## Guía Adicional
 
 Puedes consultar una guía completa sobre cómo subir archivos a Google Cloud Storage en Laravel [aquí](https://dev.to/iankumu/how-to-upload-filesimages-to-google-cloud-storage-in-laravel-4nf3).
-
-```
