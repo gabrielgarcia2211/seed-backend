@@ -60,6 +60,13 @@ return [
             'report' => false,
         ],
 
+        'gcs_sim' => [
+            'driver' => 'local',
+            'root' => storage_path('app/gcs_sim'),
+            'url' => env('APP_URL') . '/gcs_sim',
+            'visibility' => 'public',
+        ],
+
     ],
 
     /*
@@ -75,6 +82,7 @@ return [
 
     'links' => [
         public_path('storage') => storage_path('app/public'),
+        public_path('gcs_sim') => storage_path('app/gcs_sim'),
     ],
 
 ];
