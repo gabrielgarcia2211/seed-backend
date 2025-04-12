@@ -87,6 +87,18 @@ Usa herramientas como Postman o Insomnia para interactuar con la API.
 
 ```
 Authorization: Bearer TU_TOKEN
+Accept application/json
+```
+
+
+---
+
+### 🧪 8. Pruebas unitarias
+
+#### Creación y listado de products:
+
+```
+php artisan test
 ```
 
 ---
@@ -142,6 +154,11 @@ Authorization: Bearer TU_TOKEN
 
 Estas rutas están protegidas por Sanctum y requieren autenticación. 
 
-### ✅ ¡Listo!
 
-Tu API está corriendo localmente con autenticación y CRUD protegido.
+## 📬 Colección de Postman
+
+La colección de Postman para probar la API se encuentra disponible en el siguiente archivo. Puedes descargarlo directamente desde el repositorio:
+
+👉 [Descargar colección de Postman](./docs/postman/Seed.postman_collection.json)
+
+> Asegúrate de tener configurado el entorno con el token de autenticación (Bearer Token) y Headers para acceder a las rutas protegidas.
