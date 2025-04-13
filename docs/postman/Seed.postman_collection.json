@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "97cefea6-6f8d-4672-a3d7-f5f9464dca71",
+		"_postman_id": "cd979935-69e0-4522-906c-d2b7065cca19",
 		"name": "Seed",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "19268754"
@@ -174,7 +174,7 @@
 									"key": "attachment",
 									"description": "Opcional",
 									"type": "file",
-									"src": "/C:/Users/garci/Pictures/interrappi/2560px-x-1440px.jpg"
+									"src": "/C:/Users/garci/Pictures/7e9d0b6fde95a7ade9ba483756f82f9f.jpg"
 								},
 								{
 									"key": "_method",
@@ -225,7 +225,7 @@
 							}
 						],
 						"url": {
-							"raw": "http://127.0.0.1:8000/api/products/2",
+							"raw": "http://127.0.0.1:8000/api/products/12",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -237,7 +237,7 @@
 							"path": [
 								"api",
 								"products",
-								"2"
+								"12"
 							]
 						}
 					},
@@ -355,6 +355,44 @@
 								"api",
 								"user",
 								"logout"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Purchase",
+			"item": [
+				{
+					"name": "SendPurchase",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "garciaquinteroga@gmail.com",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/make-purchase",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"make-purchase"
 							]
 						}
 					},
