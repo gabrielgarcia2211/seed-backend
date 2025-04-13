@@ -1,4 +1,3 @@
-@ -0,0 +1,135 @@
 # Integración con Google Cloud Storage en Laravel
 
 ## 1. Instalación de Dependencias
@@ -125,9 +124,6 @@ Con la cuenta en GCP:
 - Instala y configura el paquete `google/cloud-storage`.
 - Sube las imágenes a tu bucket en GCS.
 
-```
-
-```
 
 ## Guía Adicional
 
